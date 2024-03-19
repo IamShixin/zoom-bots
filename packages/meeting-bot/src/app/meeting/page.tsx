@@ -111,7 +111,7 @@ export default function ZoomMeeting() {
     console.log(JSON.stringify(ZoomMtg.checkFeatureRequirements()));
     ZoomMtg.preLoadWasm();
     ZoomMtg.prepareWebSDK();
-    
+
     if (!meetingNumber || !displayName) {
       alert('Meeting number or username is empty');
       return false;
