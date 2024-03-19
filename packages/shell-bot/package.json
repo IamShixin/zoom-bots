@@ -1,6 +1,6 @@
 {
     "name": "aisde",
-    "version": "0.0.3",
+    "version": "0.0.1",
     "type": "module",
     "description": "A GPT-powered AI tool that comprehends your codebase and assists you in the development process",
     "keywords": [
@@ -12,7 +12,7 @@
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/joybro/aisde.git"
+        "url": "https://github.com/shixin-guo/my-bot/"
     },
     "main": "dist/index.js",
     "bin": {
@@ -48,11 +48,14 @@
     },
     "dependencies": {
         "@dqbd/tiktoken": "^1.0.4",
+        "@langchain/community": "^0.0.40",
+        "@langchain/core": "^0.1.48",
+        "@langchain/openai": "^0.0.21",
         "chalk": "^5.2.0",
         "commander": "^10.0.0",
         "glob": "^9.3.4",
-        "hnswlib-node": "^1.4.2",
-        "langchain": "^0.0.51",
+        "hnswlib-node": "^3.0.0",
+        "langchain": "^0.1.28",
         "ora": "^6.3.0"
     }
 }
