@@ -1,0 +1,388 @@
+AI: 
+  I will give you some documents and demo code, they are using two different versions of Vue.js, Vue2 and Vue3.
+  pls tell me the difference of <zm-input-number> input-number components between vue2 and vue3
+  don't write explanations.
+  just list the properties and methods that are removed or added in vue3
+  asap simple and clear. 
+  only output the changed properties and methods and event, and ignore the no changed stuff .
+  only output markdown table to list result.
+
+AI: 
+Here is the content of data-internal/vue2/input-number/demos/disabled.vue:
+
+<template>
+  <zm-input-number
+    v-model="num2"
+    :disabled="true"
+  />
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        num2: 1
+      };
+    }
+  };
+</script>
+
+AI: 
+Here is the content of data-internal/vue2/input-number/demos/step.vue:
+
+<template>
+  <zm-input-number
+    v-model="num3"
+    :step="2"
+  />
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        num3: 5
+      };
+    }
+  };
+</script>
+
+AI: 
+Here is the content of data-internal/vue2/input-number/demos/size.vue:
+
+<template>
+  <div>
+    <zm-input-number
+      v-model="num1"
+      size="large"
+      :min="1"
+      :max="10"
+      @change="handleChange"
+    />
+    <zm-input-number
+      v-model="num2"
+      size="small"
+      :min="1"
+      :max="10"
+      @change="handleChange"
+    />
+    <zm-input-number
+      v-model="num3"
+      size="large"
+      controls-position="both"
+      :min="1"
+      :max="10"
+      @change="handleChange"
+    />
+  </div>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        num1: 1,
+        num2: 1,
+        num3: 5
+      };
+    },
+    methods: {
+      handleChange(value) {
+        console.log(value);
+      }
+    }
+  };
+</script>
+
+AI: 
+Here is the content of data-internal/vue3/input-number/disabled.vue:
+
+<template>
+  <zm-input-number v-model="num" disabled aria-label="Kinds of fruit" />
+</template>
+
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+export default defineComponent({
+  setup() {
+    const num = ref(1)
+    return {
+      num
+    }
+  }
+})
+</script>
+
+AI: 
+Here is the content of data-internal/vue2/input-number/demos/precision.vue:
+
+<template>
+  <zm-input-number
+    v-model="num9"
+    :precision="2"
+    :step="0.1"
+    :max="10"
+  />
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        num9: 1
+      };
+    }
+  };
+</script>
+
+AI: 
+Here is the content of data-internal/vue3/input-number/basic.vue:
+
+<template>
+  <div id="basic-number">Amount:</div>
+  <zm-input-number
+    v-model="num"
+    :step="2"
+    :min="1"
+    :max="10"
+    aria-labelledby="basic-number"
+    @change="handleChange"
+  />
+</template>
+
+<script lang="ts">
+import { defineComponent, ref, watch } from 'vue'
+
+export default defineComponent({
+  setup() {
+    const num = ref(1)
+    const handleChange = (current?: number | null, prev?: number | null) => {
+      console.log(current, prev)
+    }
+    watch(num, (newV) => {
+      console.log(newV)
+    })
+    return {
+      num,
+      handleChange
+    }
+  }
+})
+</script>
+
+AI: 
+Here is the content of data-internal/vue2/input-number/demos/basic.vue:
+
+<template>
+  <zm-input-number
+    v-model="num1"
+    :min="1"
+    :max="10"
+    label="description text"
+    @change="handleChange"
+  />
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        num1: 1
+      };
+    },
+    methods: {
+      handleChange(value) {
+        console.log(value);
+      }
+    }
+  };
+</script>
+
+AI: 
+Here is the content of data-internal/vue2/input-number/en-US/input-number.md:
+
+## InputNumber
+
+Input numerical values with a customizable range.
+
+### Basic usage
+
+:::demo Bind a variable to `v-model` in `<zm-input-number>` element and you are set.
+```html
+<basic/>
+```
+:::
+
+### Disabled
+
+:::demo The `disabled` attribute accepts a `boolean`, and if the value is `true`, the component is disabled. If you just need to control the value within a range, you can add `min` attribute to set the minimum value and `max` to set the maximum value. By default, the minimum value is `0`.
+
+```html
+<disabled/>
+```
+:::
+
+### Steps
+
+Allows you to define incremental steps.
+
+:::demo Add `step` attribute to set the step.
+
+```html
+<step/>
+```
+:::
+
+### Precision
+
+:::demo Add `precision` attribute to set the precision of input value.
+
+```html
+<precision/>
+```
+
+:::
+
+:::tip
+The value of `precision` must be a non negative integer and should not be less than the decimal places of `step`.
+:::
+
+### Size
+
+:::demo Set the `size` property to control the size of the button.
+```html
+<size/>
+```
+:::
+
+### Attributes
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
+|----| ----| ---| ----| -----|
+| value / v-model   binding value| number | — | 0 |
+| size | size of the component | string | large/small | small |
+| min | the minimum allowed value | number | — | `-Infinity` |
+| max | the maximum allowed value | number | — | `Infinity` |
+| step | incremental step | number | — | 1 |
+| precision | precision of input value | number | — | — |
+| disabled| whether the component is disabled | boolean | — | false |
+| controls| whether to enable the control buttons | boolean | — | true |
+| controls-position | position of the control buttons | string | both/ right | right |
+| name | same as `name` in native input | string | — | — |
+| label | label text | string | — | — |
+| placeholder | placeholder in input | string | - | - |
+
+### Events
+| Event Name | Description | Parameters |
+|----| ---- | -----|
+|change | triggers when the value changes | currentValue, oldValue |
+| blur | triggers when Input blurs | (event: Event) |
+| focus | triggers when Input focuses | (event: Event) |
+
+### Methods
+| Method | Description | Parameters |
+|------|--------|-------|
+| focus | focus the Input component | - |
+| select | select the text in input element | — |
+
+AI: 
+Here is the content of data-internal/vue3/input-number.md:
+
+# InputNumber
+
+Only allow input of valid numerical values, with the option to define a range.
+
+## Basic Usage
+
+`v-model` sets the initial value, `min` and `max` restrict the numerical value within a range, `step` sets the increment. Since you are using `zm-input-number` standalone, make sure to set `aria-label` or `aria-labelledby`.
+
+::: demo
+```component
+<basic />
+```
+:::
+
+## Disabled
+
+Setting `disabled` to `true` will disable the entire component.
+
+::: demo
+```component
+<disabled />
+```
+:::
+
+## API
+
+### Props
+
+| Name                                              | Description                         | Type      | Default     |
+|---------------------------------------------------|-------------------------------------|-----------|-------------|
+| v-model                                           | Binding Value                       | `number`  | —           |
+| disabled                                          | Whether disabled                 | `boolean` | `false`     |
+| min                                               | Native `min` attribute              | `number`  | `-Infinity` |
+| max                                               | Native `max` attribute              | `number`  | `Infinity`  |
+| step                                              | Native `step` attribute             | `number`  | `1`         |
+| name                                              | Native `name` attribute             | `string`  | —           |
+| placeholder                                       | Native `placeholder` attribute      | `string`  | —           |
+| controls                                          | Whether to use control buttons      | `boolean` | `true`      |
+| aria-label <Badge type="tip" text="a11y" />       | Native `aria-label` attribute       | `string`  | —           |
+| aria-labelledby <Badge type="tip" text="a11y" />  | Native `aria-labelledby` attribute  | `string`  | —           |
+| aria-describedby <Badge type="tip" text="a11y" /> | Native `aria-describedby` attribute | `string`  | —           |
+
+
+### Events
+
+| Name   | Description                                                                                  | Type                          |
+|--------|----------------------------------------------------------------------------------------------|-------------------------------|
+| change | Triggered only when `modelValue` changes and the input loses focus or the user presses Enter | `(newVal: string) => void`    |
+| focus  | Triggered when it gains focus                                                                | `(event: FocusEvent) => void` |
+| blur   | Triggered when it lose focus                                                                 | `(event: FocusEvent) => void` |
+
+### Methods
+
+| Name  | Description     | Type         |
+|-------|-----------------|--------------|
+| focus | Focus the Input | `() => void` |
+AI: 
+Here is the content of data-internal/vue3/select/clearable.vue:
+
+<template>
+  <zm-select
+    v-model="value"
+    class="select-component"
+    clearable
+    aria-label="Clearable Demo"
+    placeholder="Please Select"
+  >
+    <zm-select-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value"
+    ></zm-select-option>
+  </zm-select>
+</template>
+
+<script lang="ts">
+import { ref, defineComponent } from 'vue'
+export default defineComponent({
+  setup() {
+    const value = ref()
+    const options = [
+      {
+        value: 1,
+        label: 'Apple is a fresh fruit that we can eat'
+      }
+    ]
+    return {
+      value,
+      options
+    }
+  }
+})
+</script>
+
+<style scoped>
+.select-component {
+  width: 240px;
+}
+
+.select-component + .select-component {
+  margin-left: 15px;
+}
+</style>

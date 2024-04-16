@@ -1,5 +1,6 @@
-import { ChatOpenAI } from '@langchain/openai';
 import { HumanMessage as BaseChatMessage } from '@langchain/core/messages';
+
+import { GPT } from './llm';
 
 export class ChatHistory {
   private limit: number;
@@ -18,7 +19,7 @@ export class ChatHistory {
   }
 
   async getMessagesForTokenLimit(
-    chatModel: ChatOpenAI,
+    chatModel: GPT,
     tokenLimit: number,
   ): Promise<BaseChatMessage[]> {
     let tokens = 0;

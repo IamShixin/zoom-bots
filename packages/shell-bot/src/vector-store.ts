@@ -1,12 +1,12 @@
 import { HNSWLib } from '@langchain/community/vectorstores/hnswlib';
-import { OpenAIEmbeddings } from '@langchain/openai';
+import { Embeddings } from '@langchain/core/embeddings';
 
 class VectorStore {
   private vectorStore: HNSWLib | undefined;
-  private embeddings: OpenAIEmbeddings;
+  private embeddings: Embeddings;
   private localStoragePath: string;
 
-  constructor(embeddings: OpenAIEmbeddings, localStoragePath: string) {
+  constructor(embeddings: Embeddings, localStoragePath: string) {
     this.embeddings = embeddings;
     this.localStoragePath = localStoragePath;
   }

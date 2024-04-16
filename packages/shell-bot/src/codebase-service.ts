@@ -46,11 +46,15 @@ class CodebaseService {
   }
 
   readFileContent(filePath: string): string {
-    return fs.readFileSync(filePath, 'utf-8');
+    if (fs.statSync(filePath).isFile()) {
+      return fs.readFileSync(filePath, 'utf-8');
+    }
+    return '';
   }
 
   async findRelevantFiles(query: string): Promise<string[]> {
     // Results are sorted by similarity
+    // todo
     const response = await this.vectorStore.similaritySearch(query, 10);
     return response.map((result) => result.metadata.filePath);
   }
@@ -60,6 +64,7 @@ class CodebaseService {
     const fileContents = filePaths.map((filePath) =>
       this.readFileContent(filePath),
     );
+
     const metadata = filePaths.map((filePath) => ({ filePath }));
 
     await this.vectorStore.recreateVectorsFromTexts(fileContents, metadata);

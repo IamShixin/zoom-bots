@@ -1,17 +1,20 @@
 import * as fs from 'fs';
 import * as path from 'path';
-
+// todo
 const defaultConfig = {
-  api_key: 'your_API_key_here',
-  temperature: 0.4,
-  files: ['src/**/*.{ts,tsx}', 'package.json'],
+  files: ['package.json'],
+  API_URL: '',
   vector_store_local_path: '.vector_store',
+  EMBEDDING_API_URL: '',
+  GATEWAY_TOKEN: '',
+  EMBEDDING_API_TOKEN: '',
+  EMBEDDING_MODEL: '',
 };
 
 type Config = typeof defaultConfig;
 
 const getConfig = (): Config => {
-  const configFile = path.resolve('.aisderc'); // Change the path of config file
+  const configFile = path.resolve('.aishellrc'); // Change the path of config file
   if (!fs.existsSync(configFile)) {
     console.error(
       `${configFile} not found. Please place a valid configuration file inside the project root directory.`,
@@ -21,7 +24,7 @@ const getConfig = (): Config => {
 
   try {
     const configData = JSON.parse(fs.readFileSync(configFile, 'utf-8'));
-    if (!configData.api_key) {
+    if (!configData.GATEWAY_TOKEN) {
       console.error(
         "API key not found!. Please define 'api_key' in configuration file.",
       );
